@@ -1,0 +1,51 @@
+Sub stock_market()
+
+Dim ws As Worksheet
+
+
+For Each ws In Worksheets
+
+
+
+
+ws.Cells(1, 9).Value = "Ticker"
+
+ws.Cells(1, 10).Value = "Total Stock Volume"
+
+Dim ticker As String
+
+Dim stock_total As Double
+stock_total = 0
+
+Dim summary_ticker As Integer
+summary_ticker = 2
+
+For i = 2 To 797711
+
+If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
+
+    ticker = ws.Cells(i, 1).Value
+
+    stock_total = stock_total + ws.Cells(i, 7).Value
+
+    ws.Range("I" & summary_ticker).Value = ticker
+
+    ws.Range("J" & summary_ticker).Value = stock_total
+
+    summary_ticker = summary_ticker + 1
+
+    stock_total = 0
+
+Else
+
+    stock_total = stock_total + ws.Cells(i, 7).Value
+
+End If
+
+Next i
+
+Next ws
+
+
+End Sub
+
